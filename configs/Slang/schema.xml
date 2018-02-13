@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<application name="TravelMate" id="ab989ba6a5b54314afb5b2afc9bd6fe4">
+  <types>
+    <enumEntityType name="modes">
+      <values>
+        <value identity="car" />
+        <value identity="train" />
+        <value identity="bus" />
+        <value identity="hotel" />
+      </values>
+    </enumEntityType>
+  </types>
+  <intents>
+    <intent name="navigate_to_city">
+      <entities>
+        <entity name="city_name" type="std.geo.city" required="true">
+          <prompts>
+            <str>Please specify the city name</str>
+          </prompts>
+        </entity>
+      </entities>
+      <examples>
+        <example>show me <markup entity="city_name">delhi</markup></example>
+        <example>take me to <markup entity="city_name">delhi</markup></example>
+      </examples>
+    </intent>
+    <intent name="travel_with_mode">
+      <entities>
+        <entity name="mode" type="modes" required="true">
+          <prompts>
+            <str>Please specify the mode</str>
+          </prompts>
+        </entity>
+        <entity name="source" type="std.geo.city" required="true">
+          <prompts>
+            <str>Please specify the source</str>
+          </prompts>
+        </entity>
+        <entity name="destination" type="std.geo.city" required="true">
+          <prompts>
+            <str>Please specify the destination</str>
+          </prompts>
+        </entity>
+        <entity name="date" type="std.date" required="true">
+          <prompts>
+            <str>Please specify the date</str>
+          </prompts>
+        </entity>
+      </entities>
+      <examples>
+        <example>Book a <markup entity="mode">bus</markup> ticket from <markup entity="source">mumbai</markup> to <markup entity="destination">chennai</markup> on <markup entity="date">Feb 21st</markup></example>
+        <example>Book a <markup entity="mode">hotel</markup> in <markup entity="source">mumbai</markup> on <markup entity="date">Feb 21st</markup></example>
+        <example>I want to travel via <markup entity="mode">car</markup> from <markup entity="source">mumbai</markup> to <markup entity="destination">chennai</markup> on <markup entity="date">Feb 21st</markup></example>
+      </examples>
+    </intent>
+    <intent name="travel_options">
+      <entities>
+        <entity name="source" type="std.geo.city" required="true">
+          <prompts>
+            <str>Please specify the starting city</str>
+          </prompts>
+        </entity>
+        <entity name="destination" type="std.geo.city" required="true">
+          <prompts>
+            <str>Please specify the destination</str>
+          </prompts>
+        </entity>
+        <entity name="date" type="std.date" required="true">
+          <prompts>
+            <str>Please specify the date</str>
+          </prompts>
+        </entity>
+      </entities>
+      <examples>
+        <example>How do I goto <markup entity="source">mumbai</markup> from <markup entity="destination">chennai</markup></example>
+        <example>What options do I have for my travel</example>
+      </examples>
+    </intent>
+    <intent name="trips_show">
+      <examples>
+        <example>show my recent trips </example>
+        <example>show my trips </example>
+      </examples>
+    </intent>
+    <intent name="trip_add">
+      <entities>
+        <entity name="destination" type="std.geo.city" required="true">
+          <prompts>
+            <str>Please specify the starting city</str>
+          </prompts>
+        </entity>
+        <entity name="start" type="std.date" required="true">
+          <prompts>
+            <str>Please specify the start date</str>
+          </prompts>
+        </entity>
+      </entities>
+      <examples>
+        <example>Add my trip to <markup entity="destination">chennai</markup></example>
+        <example>Add my trip to <markup entity="destination">mumbai</markup> from <markup entity="start">Feb 1st</markup></example>
+      </examples>
+    </intent>
+  </intents>
+</application>

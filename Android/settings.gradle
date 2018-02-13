@@ -1,0 +1,4 @@
+include ':app'
+//include ':app', ':slang_lib'
+
+//project(':slang_lib').projectDir = new File('../../../slang-android-sdk/slang_lib')

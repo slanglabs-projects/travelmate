@@ -1,0 +1,29 @@
+{
+  "name": "TravelMate",
+  "id":"<<fill with app-id>>",
+  "types": [
+    {
+      "$EntityType$": "enumEntityType",
+      "name": "modes",
+        "values": [
+          {
+            "identity": "front",
+            "synonyms": ["selfie", "say cheese"]
+          },
+          {
+            "identity": "back",
+            "synonyms": []
+          }
+        <type name="modes">
+            <values>
+                <str>car</str>
+                <str>train</str>
+                <str>bus</str>
+                <str>hotel</str>
+            </values>
+        </type>
+      </types>
+
+    }
+  ]
+}
