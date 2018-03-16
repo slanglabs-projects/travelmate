@@ -5,6 +5,7 @@ package utils;
  */
 public class Constants {
     public static final String ID_ADDED_INDB = "is_added_in_db";
+    public static final String TRAVEL_DATE = "travel_date";
     public static String FIRST_TIME = "is_first";
     public static final String USER_NAME = "user_name";
     public static String USER_EMAIL = "user_email";
@@ -50,6 +51,7 @@ public class Constants {
 
     public static String userid = "USERID";
     public static String servicetype = "servicetype";
+    public static final String slang_apilink = "http://kannada.slanglabs.net:6050/travelmate/";
     public static final String apilink = "http://prabhakargupta.com/travel-mate/";
     public static final String maps_key = "AIzaSyBgktirlOODUO9zWD-808D7zycmP7smp-Y";
 

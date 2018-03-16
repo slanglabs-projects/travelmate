@@ -20,6 +20,8 @@ import java.util.List;
 import flipviewpager.utils.FlipSettings;
 import objects.City;
 import tie.hackathon.travelguide.AddNewTrip;
+import tie.hackathon.travelguide.BusList;
+import tie.hackathon.travelguide.BusUtils;
 import tie.hackathon.travelguide.CityUtils;
 import tie.hackathon.travelguide.MyTripUtils;
 import tie.hackathon.travelguide.MyTrips;
@@ -33,6 +35,11 @@ public class VoiceInterface {
 
     private static final String INTENT_CITY_SEARCH = "navigate_to_city";
     private static final String INTENT_TRAVEL_MODE = "travel_with_mode";
+    private static final String ENTITY_SOURCE_CITY = "source";
+    private static final String ENTITY_DESTINATION_CITY = "destination";
+    private static final String ENTITY_START_DATE = "date";
+    private static final String ENTITY_TRAVEL_MODE = "mode";
+
     private static final String INTENT_TRAVEL_OPTIONS = "travel_options";
     private static final String INTENT_TRIPS_SHOW = "trips_show";
     private static final String INTENT_TRIP_ADD = "trip_add";
@@ -46,7 +53,7 @@ public class VoiceInterface {
         // Initialize slang and turn off trigger by default
         Slang
             .init(appContext)
-            .appKey("ab989ba6a5b54314afb5b2afc9bd6fe4")
+            .appId("ab989ba6a5b54314afb5b2afc9bd6fe4")
             .ui()
             .trigger()
             .hide();
@@ -76,7 +83,7 @@ public class VoiceInterface {
                 }
 
                 @Override
-                public void onIntentDetected(
+                public boolean onIntentDetected(
                     @NonNull final Activity activity,
                     final SlangIntent intent,
                     final SlangAction.IntentProgressListener listener) {
@@ -85,7 +92,6 @@ public class VoiceInterface {
                         case INTENT_CITY_SEARCH:
                             handleCitySearch(activity, intent, listener);
                             break;
-
                         case INTENT_TRAVEL_MODE:
                             handleTravelMode(activity, intent, listener);
                             break;
@@ -98,7 +104,11 @@ public class VoiceInterface {
                         case INTENT_TRIP_ADD:
                             handleTripAdd(activity, intent, listener);
                             break;
+                        default:
+                            return true;
                     }
+
+                    return false;
                 }
             });
     }
@@ -108,7 +118,31 @@ public class VoiceInterface {
         final SlangIntent intent,
         final SlangAction.IntentProgressListener listener
     ) {
+        listener.intentCompleted(intent);
+        try {
+            String strDate = intent.getEntity(ENTITY_START_DATE).getValue();
+            Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+            String source = intent.getEntity(ENTITY_SOURCE_CITY).getValue();
+            String destination = intent.getEntity(ENTITY_DESTINATION_CITY).getValue();
+            String mode = intent.getEntity(ENTITY_TRAVEL_MODE).getValue();
 
+            switch (mode) {
+                case "bus":
+                    Intent i = new Intent(activity, BusList.class);
+                    i.putExtra(Constants.SOURCE_CITY, source);
+                    i.putExtra(Constants.DESTINATION_CITY, destination);
+                    i.putExtra(Constants.TRAVEL_DATE, startDate);
+                    activity.startActivity(i);
+                    listener.intentCompleted(intent, "Showing available bus options", false);
+                    break;
+
+                default:
+                    listener.intentCompleted(intent, "Sorry this is not support currently", true);
+                    break;
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "error parsing date - " + e.getLocalizedMessage());
+        }
     }
 
     private static void handleTravelOptions(
@@ -116,7 +150,7 @@ public class VoiceInterface {
         final SlangIntent intent,
         final SlangAction.IntentProgressListener listener
     ) {
-
+        listener.intentCompleted(intent);
     }
 
     private static void handleTripAdd(

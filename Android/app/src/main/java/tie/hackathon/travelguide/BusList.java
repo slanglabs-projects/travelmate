@@ -54,9 +54,10 @@ public class BusList extends AppCompatActivity implements OnDateSetListener, Tim
     @BindView(R.id.seldate)     TextView    selectdate;
     @BindView(R.id.city)        TextView    city;
 
+    private final String DEFAULT_DATE = "28-February-2018";
     private String source;
     private String dest;
-    private String dates = "17-October-2015";
+    private String dates = DEFAULT_DATE;
 
     private Handler             mHandler;
     private SharedPreferences   sharedPreferences;
@@ -72,13 +73,10 @@ public class BusList extends AppCompatActivity implements OnDateSetListener, Tim
 
         ButterKnife.bind(this);
 
-        sharedPreferences   = PreferenceManager.getDefaultSharedPreferences(this);
-        source              = sharedPreferences.getString(Constants.SOURCE_CITY, "delhi");
-        dest                = sharedPreferences.getString(Constants.DESTINATION_CITY, "mumbai");
+        getArgs();
 
         selectdate.setText(dates);
         city.setText(source + " to " + dest);
-
 
         getBuslist();
         final Calendar calendar = Calendar.getInstance();
@@ -176,47 +174,15 @@ public class BusList extends AppCompatActivity implements OnDateSetListener, Tim
      * Calls API to get bus list
      */
     private void getBuslist() {
-
         pb.setVisibility(View.VISIBLE);
-        String uri = Constants.apilink + "bus-booking.php?src=" +
-                source +
-                "&dest=" +
-                dest +
-                "&date=" +
-                dates;
-
-        Log.e("CALLING : ", uri);
-
-        //Set up client
-        OkHttpClient client = new OkHttpClient();
-        //Execute request
-        Request request = new Request.Builder()
-                .url(uri)
-                .build();
-        //Setup callback
-        //Setup callback
-        client.newCall(request).enqueue(new Callback() {
+        BusUtils.getBuslist(source, dest, dates, new BusUtils.BusDataCallback() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e("Request Failed", "Message : " + e.getMessage());
-            }
-
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                final String res = response.body().string();
+            public void onBusData(final JSONArray YTFeedItems) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Log.e("RESPONSE : ", "Done");
-                        try {
-                            JSONObject YTFeed = new JSONObject(String.valueOf(res));
-                            JSONArray YTFeedItems = YTFeed.getJSONArray("results");
-                            Log.e("response", YTFeedItems + " ");
-                            pb.setVisibility(View.GONE);
-                            lv.setAdapter(new Bus_adapter(BusList.this, YTFeedItems));
-                        } catch (JSONException e1) {
-                            e1.printStackTrace();
-                        }
+                        pb.setVisibility(View.GONE);
+                        lv.setAdapter(new Bus_adapter(BusList.this, YTFeedItems));
                     }
                 });
             }
@@ -224,11 +190,32 @@ public class BusList extends AppCompatActivity implements OnDateSetListener, Tim
     }
 
 
+    private void getArgs() {
+        Intent intent = getIntent();
+
+        source = intent.getStringExtra(Constants.SOURCE_CITY);
+        dest = intent.getStringExtra(Constants.DESTINATION_CITY);
+        dates = intent.getStringExtra(Constants.TRAVEL_DATE);
+
+        sharedPreferences   = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (source == null) {
+            source = sharedPreferences.getString(Constants.SOURCE_CITY, "bangalore");
+        }
+
+        if (dest == null) {
+            dest = sharedPreferences.getString(Constants.DESTINATION_CITY, "chennai");
+        }
+
+        if (dates == null) {
+            dates = DEFAULT_DATE;
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
-        source = sharedPreferences.getString(Constants.SOURCE_CITY, "delhi");
-        dest = sharedPreferences.getString(Constants.DESTINATION_CITY, "mumbai");
+        getArgs();
         city.setText(source + " to " + dest);
         getBuslist(); // Update Bus list
     }

@@ -108,7 +108,7 @@ public class MyTrips extends AppCompatActivity {
                 .progress(true, 0)
                 .show();
 
-        String uri = Constants.apilink + "trip/get-all.php?user=" + userid;
+        String uri = Constants.slang_apilink + "trip/get-all.php?user=" + userid;
         Log.e("executing", uri + " ");
 
 

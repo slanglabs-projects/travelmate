@@ -6,7 +6,6 @@
 
 	$response_array = array();
 	$connection = get_mysql_connection();
-
 	$query = "SELECT `id`,`city_name`,`lat`,`lng`,`image` FROM `cities` ORDER BY `number_of_trips` DESC LIMIT 6";
 	$query_run = mysqli_query($connection, $query);
 	

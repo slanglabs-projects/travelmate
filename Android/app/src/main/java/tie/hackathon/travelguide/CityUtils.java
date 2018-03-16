@@ -39,8 +39,8 @@ public class CityUtils {
     ) {
         // to fetch city names
         String uri = cityName == null ?
-            Constants.apilink + "all-cities.php" :
-            Constants.apilink + "city/autocomplete.php?search=" + cityName.trim();
+            Constants.slang_apilink + "all-cities.php" :
+            Constants.slang_apilink + "city/autocomplete.php?search=" + cityName.trim();
         Log.e("executing", uri + " ");
 
         //Set up client
@@ -114,8 +114,14 @@ public class CityUtils {
     }
 
     private static void allCityResponse(Response response, CityDataCallback listener) throws JSONException, IOException {
-        JSONObject ob = new JSONObject(response.body().string());
-        JSONArray ar = ob.getJSONArray("cities");
+        String responseStr = response.body().string();
+        JSONArray ar = new JSONArray();
+
+        if (responseStr != null && responseStr.length() > 0) {
+            JSONObject ob = new JSONObject(responseStr);
+            ar = ob.getJSONArray("cities");
+        }
+
         FlipSettings settings = new FlipSettings.Builder().defaultPage().build();
         List<City> cities = new ArrayList<>();
         for (int i = 0; i < ar.length(); i++) {

@@ -5,10 +5,19 @@
 
 	$response = array();
 
-	$user_id         = (int)$_GET['user'];
-	$trip_title      = trim($_GET['title']);
-	$trip_start_time = (int)$_GET['start_time'];
-	$trip_city       = (int)$_GET['city'];
+        $connection = get_mysql_connection();
+
+        if (defined('STDIN')) {
+          $user_id = $argv[1];
+          $trip_title = $argv[2];
+          $trip_start_time = $argv[3];
+          $trip_city = $argv[4];
+        } else { 
+          $user_id = $_GET['user'];
+          $trip_title = $_GET['title'];
+          $trip_start_time = $_GET['start_time'];
+          $trip_city = $_GET['city'];
+        }
 
 	if (isset($_GET['end_time'])) {
 		$trip_end_time = (int)$_GET['end_time'];
@@ -26,12 +35,15 @@
 			VALUES ('$trip_id', '$user_id')";
 
 		if (mysqli_query($connection, $query_ins)) {
+                        echo "success";
 			$success = 1;
 			increase_trip_count($connection, $trip_city);
 		} else {
+                        echo "fail 1";
 			$success = 0;
 		}
 	} else {
+        	echo "Failed to query to MySQL: " . mysqli_error($connection);
 		$success = 0;
 	}
 

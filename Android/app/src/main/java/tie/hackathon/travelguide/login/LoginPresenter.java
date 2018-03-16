@@ -49,7 +49,7 @@ public class LoginPresenter {
 
         view.showLoadingDialog();
 
-        String uri = Constants.apilink + "users/signup.php?name=" + name + "&contact=" + num + "&password=" + pass;
+        String uri = Constants.slang_apilink + "users/signup.php?name=" + name + "&contact=" + num + "&password=" + pass;
 
         //Set up client
         OkHttpClient client = new OkHttpClient();
@@ -102,7 +102,7 @@ public class LoginPresenter {
 
         view.showLoadingDialog();
 
-        String uri = Constants.apilink + "users/login.php?contact=" + num + "&password=" + pass;
+        String uri = Constants.slang_apilink + "users/login.php?contact=" + num + "&password=" + pass;
         //Set up client
         OkHttpClient client = new OkHttpClient();
         //Execute request

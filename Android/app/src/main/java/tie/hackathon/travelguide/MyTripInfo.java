@@ -138,7 +138,7 @@ public class MyTripInfo extends AppCompatActivity {
                 .show();
 
         // to fetch city names
-        String uri = Constants.apilink + "trip/get-one.php?trip=" + id;
+        String uri = Constants.slang_apilink + "trip/get-one.php?trip=" + id;
         Log.e("executing", uri + " ");
 
 
@@ -226,7 +226,7 @@ public class MyTripInfo extends AppCompatActivity {
 
     private void friendautocomplete() {
 
-        String uri = Constants.apilink + "users/find.php?search=" + nameyet.trim();
+        String uri = Constants.slang_apilink + "users/find.php?search=" + nameyet.trim();
         Log.e("executing", uri + " ");
 
         //Set up client
@@ -303,7 +303,7 @@ public class MyTripInfo extends AppCompatActivity {
                 .progress(true, 0)
                 .show();
 
-        String uri = Constants.apilink + "trip/add-user.php?user=" + friendid + "&trip=" + id;
+        String uri = Constants.slang_apilink + "trip/add-user.php?user=" + friendid + "&trip=" + id;
         Log.e("executing", uri + " ");
 
         //Set up client

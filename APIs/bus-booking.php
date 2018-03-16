@@ -46,6 +46,7 @@ if (isset($_GET['src']) && isset($_GET['dest']) && isset($_GET['date'])) {
 		no_results_error();
 	} else {
 		echo json_encode(array('results' => $final_response));
+        }
 } else {
 	// incorrect parameters passed
 	invalid_parametes_error();

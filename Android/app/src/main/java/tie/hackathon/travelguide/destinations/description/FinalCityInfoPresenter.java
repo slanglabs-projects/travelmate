@@ -31,7 +31,7 @@ public class FinalCityInfoPresenter {
     public void fetchCityInfo(String id) {
         mFinalCityInfoView.showProgress();
 
-        String uri = Constants.apilink + "city/info.php?id=" + id;
+        String uri = Constants.slang_apilink + "city/info.php?id=" + id;
         Request request = new Request.Builder()
                 .url(uri)
                 .build();

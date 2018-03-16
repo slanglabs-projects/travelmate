@@ -70,9 +70,9 @@ public class MyTripUtils {
     ) {
         String userid = PreferenceManager.getDefaultSharedPreferences(activity).getString(Constants.USER_ID, "1");
 
-        String uri = Constants.apilink + "trip/add-trip.php?user=" + userid +
+        String uri = Constants.slang_apilink + "trip/add-trip.php?user=" + userid +
             "&title=" + tripname +
-            "&start_time=" + startdate +
+            "&start_time=" + startdate.getTime() / 1000 +
             "&city=" + cityid;
 
         Log.e("CALLING : ", uri);

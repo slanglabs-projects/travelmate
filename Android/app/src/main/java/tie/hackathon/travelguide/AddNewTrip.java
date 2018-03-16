@@ -126,7 +126,7 @@ public class AddNewTrip extends AppCompatActivity implements DatePickerDialog.On
     private void tripAutoComplete() {
 
         // to fetch city names
-        String uri = Constants.apilink + "city/autocomplete.php?search=" + nameyet.trim();
+        String uri = Constants.slang_apilink + "city/autocomplete.php?search=" + nameyet.trim();
         Log.e("executing", uri + " ");
 
         //Set up client

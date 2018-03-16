@@ -122,7 +122,7 @@ public class SelectCity extends AppCompatActivity {
     private void getcitytask() {
 
         // to fetch city names
-        String uri = Constants.apilink + "all-cities.php";
+        String uri = Constants.slang_apilink + "all-cities.php";
         Log.e("executing", uri + " ");
 
 

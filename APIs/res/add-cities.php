@@ -3,7 +3,7 @@
 require_once '../inc/connection.inc.php';
 require_once '../inc/function.inc.php';
 
-define("GOOGLE_GEOCODE_KEY", "AIzaSyDWr-d-W8_579-jbY4lzUSpcDUeEjkFbQw");
+define("GOOGLE_GEOCODE_KEY", "AIzaSyA8JwmXGYJAICK5PzZM98wss-QJwOXeEFo");
 
 $google_url = "https://maps.googleapis.com/maps/api/geocode/json?key=" . GOOGLE_GEOCODE_KEY . "&address=";
 

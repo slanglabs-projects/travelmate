@@ -5,6 +5,8 @@
 	$trip_id = (int)$_GET['trip'];
 	$response = array();
 
+        $connection = get_mysql_connection();
+
 	if ($trip_id > 0) {	
 		$query = "SELECT T.title, T.start_time, T.end_time, C.city_name 
 			FROM `trips` T INNER JOIN `cities` C ON T.city_id = C.id 
