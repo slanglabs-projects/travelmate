@@ -56,12 +56,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     // Slang Labs
-//    implementation('com.slanglabs.sdk.android:slang_lib:+@aar') {
-//        changing = true
-//        transitive = true
-//    }
-//    implementation 'com.google.protobuf:protobuf-java:3.4.0'
-    implementation project(':slang_lib')
+    implementation('com.slanglabs.sdk.android:slang_lib:+@aar') {
+        changing = true
+        transitive = true
+    }
+//    implementation project(':slang_lib')
 
     implementation 'com.squareup.okhttp3:okhttp:3.4.1'
 
