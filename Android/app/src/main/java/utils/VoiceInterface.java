@@ -53,7 +53,8 @@ public class VoiceInterface {
         // Initialize slang and turn off trigger by default
         Slang
             .init(appContext)
-            .appId("ab989ba6a5b54314afb5b2afc9bd6fe4")
+            .appId("3db266a1caaf4704b0e9d558b089487c")
+            .authKey("4806e1cd998249aea80fed9c628ceb18")
             .ui()
             .trigger()
             .hide();
@@ -62,11 +63,11 @@ public class VoiceInterface {
     }
 
     public static void setHelpMessage(String helpMessage) {
-        Slang.ui().surface().setHelpMessage(helpMessage);
+        Slang.setShortHelpMessage(helpMessage);
     }
 
     public static void setMainHelpMessage() {
-        setHelpMessage("How can we help you?\nTry saying \n\"Show me Bangalore\"\n\"Show my recent trips\"\n\"Cancel\" (or) \"Never mind\"");
+        Slang.setHelpMessage("How can we help you?\nTry saying \n\"Show me Bangalore\"\n\"Show my recent trips\"\n\"Cancel\" (or) \"Never mind\"");
     }
 
     private static void registerActions() {

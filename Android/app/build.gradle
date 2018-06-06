@@ -2,11 +2,22 @@ apply plugin: 'com.android.application'
 apply from: '../config/checkstyle.gradle'
 apply plugin: 'checkstyle'
 
+ext {
+    if (System.getenv("BUILD_DEMO").equals("true")) {
+        appName = "tie.hackathon.travelguide.demo"
+        appLogo = "@drawable/slang_icon_v2"
+    } else {
+        appName = "tie.hackathon.travelguide"
+        appLogo = "@drawable/google_travel_logo"
+    }
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId "tie.hackathon.travelguide"
+        applicationId "$appName"
+        manifestPlaceholders = [applicationLogo:"$appLogo"]
         minSdkVersion 19
         targetSdkVersion 21
         versionCode 2
@@ -35,7 +46,7 @@ repositories {
     maven { url "http://repo.commonsware.com.s3.amazonaws.com" }
     maven { url "https://jitpack.io" }
     maven {
-        url "http://kannada.slanglabs.net:8082/artifactory/gradle-release-local"
+        url "http://maven.slanglabs.in:8080/artifactory/gradle-release"
     }
     google()
 }
@@ -45,9 +56,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     // Slang Labs
-    implementation('com.slanglabs.sdk.android:slang_lib:+@aar') 
-    implementation 'com.google.protobuf:protobuf-java:3.4.0'
-//    implementation project(':slang_lib')
+//    implementation('com.slanglabs.sdk.android:slang_lib:+@aar') {
+//        changing = true
+//        transitive = true
+//    }
+//    implementation 'com.google.protobuf:protobuf-java:3.4.0'
+    implementation project(':slang_lib')
 
     implementation 'com.squareup.okhttp3:okhttp:3.4.1'
 

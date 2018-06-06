@@ -1,0 +1,223 @@
+name: TravelMate
+id: travel-mate-intents
+imports: []
+types:
+- "$EntityType$": enumEntityType
+  name: modes
+  values:
+  - identity: bus
+    synonyms: []
+  - identity: car
+    synonyms: []
+  - identity: hotel
+    synonyms: []
+  - identity: train
+    synonyms: []
+intents:
+- name: navigate_to_city
+  entities:
+  - name: city_name
+    type: std.geo.city
+    required: true
+    list: false
+    default: 
+    prompts:
+    - Please specify the city name
+  examples:
+  - - text: show me
+      entity: 
+      value: 
+    - text: delhi
+      entity: city_name
+      value: 
+  - - text: take me to
+      entity: 
+      value: 
+    - text: delhi
+      entity: city_name
+      value: 
+  confirmations: []
+- name: travel_options
+  entities:
+  - name: date
+    type: std.date
+    required: true
+    list: false
+    default: 
+    prompts:
+    - Please specify the date
+  - name: destination
+    type: std.geo.city
+    required: true
+    list: false
+    default: 
+    prompts:
+    - Please specify the destination
+  - name: source
+    type: std.geo.city
+    required: true
+    list: false
+    default: 
+    prompts:
+    - Please specify the starting city
+  examples:
+  - - text: How do I goto
+      entity: 
+      value: 
+    - text: mumbai
+      entity: source
+      value: 
+    - text: from
+      entity: 
+      value: 
+    - text: chennai
+      entity: destination
+      value: 
+  - - text: What options do I have for my travel
+      entity: 
+      value: 
+  confirmations: []
+- name: travel_with_mode
+  entities:
+  - name: date
+    type: std.date
+    required: true
+    list: false
+    default: 
+    prompts:
+    - Please specify the date
+  - name: destination
+    type: std.geo.city
+    required: true
+    list: false
+    default: 
+    prompts:
+    - Please specify the destination
+  - name: mode
+    type: modes
+    required: true
+    list: false
+    default: 
+    prompts:
+    - Please specify the mode
+  - name: source
+    type: std.geo.city
+    required: true
+    list: false
+    default: 
+    prompts:
+    - Please specify the source
+  examples:
+  - - text: Book a
+      entity: 
+      value: 
+    - text: bus
+      entity: mode
+      value: 
+    - text: ticket from
+      entity: 
+      value: 
+    - text: mumbai
+      entity: source
+      value: 
+    - text: to
+      entity: 
+      value: 
+    - text: chennai
+      entity: destination
+      value: 
+    - text: 'on'
+      entity: 
+      value: 
+    - text: Feb 21st
+      entity: date
+      value: 
+  - - text: Book a
+      entity: 
+      value: 
+    - text: hotel
+      entity: mode
+      value: 
+    - text: in
+      entity: 
+      value: 
+    - text: mumbai
+      entity: source
+      value: 
+    - text: 'on'
+      entity: 
+      value: 
+    - text: Feb 21st
+      entity: date
+      value: 
+  - - text: I want to travel via
+      entity: 
+      value: 
+    - text: car
+      entity: mode
+      value: 
+    - text: from
+      entity: 
+      value: 
+    - text: mumbai
+      entity: source
+      value: 
+    - text: to
+      entity: 
+      value: 
+    - text: chennai
+      entity: destination
+      value: 
+    - text: 'on'
+      entity: 
+      value: 
+    - text: Feb 21st
+      entity: date
+      value: 
+  confirmations: []
+- name: trip_add
+  entities:
+  - name: destination
+    type: std.geo.city
+    required: true
+    list: false
+    default: 
+    prompts:
+    - Please specify the starting city
+  - name: start
+    type: std.date
+    required: true
+    list: false
+    default: 
+    prompts:
+    - Please specify the start date
+  examples:
+  - - text: Add my trip to
+      entity: 
+      value: 
+    - text: chennai
+      entity: destination
+      value: 
+  - - text: Add my trip to
+      entity: 
+      value: 
+    - text: mumbai
+      entity: destination
+      value: 
+    - text: from
+      entity: 
+      value: 
+    - text: Feb 1st
+      entity: start
+      value: 
+  confirmations: []
+- name: trips_show
+  entities: []
+  examples:
+  - - text: show my recent trips
+      entity: 
+      value: 
+  - - text: show my trips
+      entity: 
+      value: 
+  confirmations: []

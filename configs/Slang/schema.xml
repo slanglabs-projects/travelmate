@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<application name="TravelMate" id="ab989ba6a5b54314afb5b2afc9bd6fe4">
+<application name="TravelMate" id="travel-mate-intents">
   <types>
     <enumEntityType name="modes">
       <values>

@@ -3,6 +3,7 @@ package tie.hackathon.travelguide;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -78,6 +79,14 @@ public class CityFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        /* Uncomment these lines if you want to customize the Slang UI */
+        /* Slang
+                .ui()
+                .surface()
+                .setImageResource(R.drawable.custom_icon)
+                .setTextColor(Color.BLACK)
+                .setBackgroundColor(Color.LTGRAY);
+        Slang.ui().trigger().setImageResource(R.drawable.custom_mic).show(); */
         Slang.ui().trigger().show();
     }
 

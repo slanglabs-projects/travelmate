@@ -192,7 +192,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void checkUserSession() {
         // By pass login with this hack
-        rememberUserInfo("1082", "Kumar", "9999999999");
+        rememberUserInfo("9", "Kumar", "9999999999");
 
         if (sharedPreferences.getString(Constants.USER_ID, null) != null) {
             Intent i = new Intent(LoginActivity.this, MainActivity.class);
