@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.dd.processbutton.FlatButton;
 import com.fourmob.datetimepicker.date.DatePickerDialog;
+import com.slanglabs.slang.SlangContext;
 import com.sleepbot.datetimepicker.time.RadialPickerLayout;
 import com.sleepbot.datetimepicker.time.TimePickerDialog;
 
@@ -95,6 +96,12 @@ public class AddNewTrip extends AppCompatActivity implements DatePickerDialog.On
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SlangContext.getInstance().endIntent("trip_add");
+    }
+
 
     @OnTextChanged(R.id.cityname) void onTextChanged(){
         nameyet = cityname.getText().toString();
@@ -102,6 +109,7 @@ public class AddNewTrip extends AppCompatActivity implements DatePickerDialog.On
             Log.e("name", nameyet + " ");
             tripAutoComplete();     // Calls API to autocomplete cityname
         }
+        SlangContext.getInstance().addEntity("destination", nameyet);
     }
 
     @Override
@@ -208,6 +216,7 @@ public class AddNewTrip extends AppCompatActivity implements DatePickerDialog.On
                         Log.e("RESPONSE : ", "Done");
                         Toast.makeText(AddNewTrip.this, "Trip added", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
+                        SlangContext.getInstance().endIntent("trip_add");
                     }
                 });
             }

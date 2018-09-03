@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.slanglabs.slang.SlangContext;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -90,15 +91,12 @@ public class MyTrips extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        VoiceInterface.setMainHelpMessage();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        VoiceInterface.setHelpMessage("To add a new trip say\n\"Add my trip to Bangalore from 1st Feb\"\n\"Cancel\" (or) \"Never mind\"");
     }
-
 
     private void mytrip() {
 
@@ -196,6 +194,7 @@ public class MyTrips extends AppCompatActivity {
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        SlangContext.getInstance().beginUnconfirmedIntent("trip_add");
                         Intent i = new Intent(MyTrips.this, AddNewTrip.class);
                         context.startActivity(i);
                     }

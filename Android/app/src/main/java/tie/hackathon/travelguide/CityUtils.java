@@ -1,6 +1,7 @@
 package tie.hackathon.travelguide;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
@@ -76,12 +77,12 @@ public class CityUtils {
             });
     }
 
-    public static void launchCity(Activity activity, String cityId, String cityName, String cityImage) {
-        Intent i = new Intent(activity, FinalCityInfo.class);
+    public static void launchCity(Context context, String cityId, String cityName, String cityImage) {
+        Intent i = new Intent(context, FinalCityInfo.class);
         i.putExtra("id_", cityId);
         i.putExtra("name_", cityName);
         i.putExtra("image_", cityImage);
-        activity.startActivity(i);
+        context.startActivity(i);
     }
 
     private static void matchedCityResponse(Response response, CityDataCallback listener) throws JSONException, IOException{

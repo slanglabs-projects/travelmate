@@ -130,8 +130,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-        VoiceInterface.setMainHelpMessage();
-        VoiceInterface.setHelpMessage("Welcome to TravelMate\nTry saying \"Show me Banglaore\"");
     }
 
     @Override

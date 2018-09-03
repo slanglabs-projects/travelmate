@@ -12,7 +12,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.estimote.sdk.BeaconManager;
-import com.slanglabs.slang.Slang;
 
 import utils.Constants;
 import utils.VoiceInterface;
